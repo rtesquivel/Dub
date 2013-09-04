@@ -1,0 +1,379 @@
+/*
+Theme Name:     Duarte Process Map
+Theme URI:      http://process.duarte.com/
+Description:    Extends TwentyTwelve
+Author:         Chris Iufer
+Author URI:     http://www.duarte.com
+
+Version:        0.1.0
+*/
+
+ul.none li {
+	padding-left: 0;
+
+}
+
+#timeline {
+	/*overflow: visible;*/
+	margin-top:0;
+	padding-top:0;
+}
+
+.timeline-inner {
+	/*padding: 0;*/
+}
+
+html.dark .timeline {
+	min-height: 100px;
+	
+}
+.row.timeline {
+	padding-bottom: 20px;
+}
+.timeline table {
+	background: transparent;
+	border: 0;
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom:0;
+}
+
+.timeline th { 
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 10px; 
+	margin-right: 2em; 
+	margin-top: 1em;
+	text-transform: uppercase;
+	padding: 3px 12px;
+	background-color: #bd3826;
+	border-left: 1px solid #d6a89f;
+	text-align:center;
+	line-height:1.2em;
+}
+.timeline th a {
+	color: white;
+}
+html.dark .timeline th { 
+	background-color: #5b5752;
+	border-left: 1px solid #111;
+}
+
+.timeline thead th:first-child {
+	border-left: 0;
+}
+
+.timeline td,
+.timeline th {
+	/*border: 1px solid #999;*/
+	cursor: pointer;
+}
+
+.timleline td,
+.timeline table tbody tr:nth-child(even) {
+		background: transparent;
+}
+
+.timeline td {
+	background-color: #e3e3dd;
+	border-bottom: 1px solid transparent;
+	height: 18px;
+}
+
+.timeline td.active-step,
+.timeline td.active-phase {
+	background-color: #f1f2ee;
+}
+
+.timeline td.active {
+}
+
+.timeline td.phase {
+	border-left: 1px solid #c4bda3;
+}
+
+.timeline td.active div {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;	
+	width: 100%;
+	margin-top: 3px;
+	border-color: transparent;
+}
+
+.timeline td.active-step div {
+	border-top-style: solid;
+	border-top-width: 5px;
+	margin-top: 0;
+	border-color: transparent;
+}
+
+.timeline table tbody tr td {
+	color: #333;
+	padding:4px 1px 7px 0;
+	vertical-align: top;
+}
+
+html.dark .timeline td {
+	background-color: #3b3b33;
+	/*border-bottom: 1px solid #2a2a2a;*/
+}
+html.dark .timeline td.active-step,
+html.dark .timeline td.active-phase {
+	background-color: #4a4846;
+	border-color: #4a4846;
+}
+html.dark .timeline td.active {
+}
+html.dark .timeline td.phase {
+	border-left: 1px solid #111;
+}
+
+html.dark .timeline th a { 
+	color: white;
+}
+
+ul.artifacts {
+	margin:0;	
+}
+
+.highlight-one {
+	color: #3fbfcf;
+}
+.highlight-two {
+	color: #a05324;
+}
+.highlight-three {
+	color: #653396;
+}
+.highlight-four {
+	color: #3c6dbf;
+}
+
+html.dark .highlight-one {
+	color: #71bbe2;
+}
+html.dark .highlight-two {
+	color: #d0d46d;
+}
+html.dark .highlight-three {
+	color: #c04030;
+}
+html.dark .highlight-four {
+	color: #a9d37c;
+}
+
+.bubble {
+	position:absolute;
+	left: -10px;	
+	width: 12px;
+	height: 12px;
+	margin-top:-18px;
+	-moz-border-radius: 100px;
+	-ms-border-radius: 100px;
+	-webkit-border-radius: 100px;
+	-o-border-radius: 100px;
+	border-radius: 100px;
+	background-color: white;
+}
+
+.circle {
+	margin-left:auto;
+	margin-right:auto;
+	border-radius: 999px;
+	font-size: 22px;
+	width:140px;
+	height: 140px;
+	display:block;
+	font-family: "ApexNew Book Italic";
+	text-transform: none;
+	font-weight: normal;
+	background-color: #6C6C6C;
+	background-repeat: no-repeat;
+	-webkit-box-shadow: 0 0 0 transparent inset;
+	-moz-box-shadow: 0 0 0 transparent inset;
+	box-shadow: 0 0 0 transparent inset;
+	border: none;
+	color: #fff;
+	vertical-align:middle;
+	line-height: 140px;
+	-webkit-transition: background-color 0.15s ease-in-out; -moz-transition: background-color 0.15s ease-in-out; -o-transition: background-color 0.15s ease-in-out; transition: background-color 0.15s ease-in-out;
+}
+
+.circle:hover {
+	background-color:#009bb3;
+	color: #ffffff;
+}
+
+.artifact {
+/*	background: url("img/doc-icon.png") left 0 no-repeat;*/
+	padding-left: 18px;
+	clear: left;
+	margin-bottom: 20px;
+	line-height: 20px;
+}
+.block-grid .artifact,
+.block-grid.three-up > .artifact {
+	background-position: 10px top;
+	/*padding-left: 28px;*/
+	clear: none;
+}
+
+.legend {
+	position: absolute;
+	left: -8px;
+	bottom: 2px;
+	z-index: 999;
+	margin:0;
+}
+
+.legend li {
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 11px;
+	line-height: 18px;
+	margin:0;
+}
+
+html.dark .legend li {
+	color: white;
+}
+
+.artifact-card {
+	width:150px; 
+	text-align:center; 
+	display:table-cell; 
+	vertical-align:middle; 
+	height:150px; 
+	background: #ececec;
+}
+
+html.dark .artifact-card {
+ 	background: #222;
+}
+
+.no-margin {
+	margin:0;
+}
+
+
+@media only screen and (max-width: 767px) {
+#timeline {
+	overflow: auto;
+}
+  .bubble {
+  	left: auto;
+  	right: 30px;
+  }
+
+  .artifact {
+	padding-left: 18px;
+	margin-left: 0;
+  }
+
+  .legend {
+  	left: 5px;
+  }
+}
+
+.comments-area {
+	margin-top: 4em;
+}
+.comment-form-comment label {
+	display:inline;
+}
+.row.comment-block {
+	margin-bottom: 2em;
+}
+.comment-meta h5 {
+	margin-top: 0;
+}
+.comment {
+
+}
+#respond h3 {
+	color: #26231e;
+	padding-top: 0.5em;
+	font-family: Arial, sans-serif;
+	text-transform: uppercase;
+	font-size: 95%;
+	font-weight: bold;
+}
+html.dark #respond h3 {
+	border-top: 0;
+	color: #66625a;
+}
+.gallery { 
+	padding-top:1em; 
+}
+
+#front-page h1 {
+	margin: 0.5em 0;
+}
+#front-page img {
+	margin-bottom: 1em;
+}
+/*Overrride vogue default table styles*/
+html.dark table,
+html.dark table tbody tr,
+html.dark table thead tr th, 
+html.dark table thead tr td, 
+html.dark table tfoot tr th, 
+html.dark table tfoot tr td,
+table thead tr th, 
+table thead tr td, 
+table tfoot tr th, 
+table tfoot tr td {
+	border-bottom: 0;
+}
+
+
+.list-finder input[type=text] {
+	font-family: "ApexNew Book";
+	height: 52px;
+	font-size: 24px;
+}
+
+.seatPopup {
+	background-color: rgba(255,255,255,.95);
+	padding:7px;
+	border: 1px solid;
+	border-radius:1px;
+	border-color:#68675a;
+	width: 191px;
+	clear: both;
+
+
+}
+
+nav li a {color: rgb(0, 158, 186);}
+
+body > header nav ul li:active a, body > header nav ul li.active a, body > header nav ul li.current-menu-item a, body > header nav ul li.current-page-item a, body > header nav ul li.current_page_parent a, body > header nav ul li.current_page_item a { color: rgb(51, 43, 36); }
+
+
+body> header nav ul li .menu-item .menu-item-1122 .menu-item-type-post_type .menu-item-object-page .menu-main-menu .menu-main-menu-container #menu-main-menu {
+	color: black;
+}
+
+.comingSoon {
+	opacity:0.4;
+	filter:alpha(opacity=40); 
+}
+
+.active a{
+	background-color:rgb(189, 56, 38);
+}
+
+.roomPic {
+    float: left;
+    margin: .5em 10px .5em 0;
+    overflow: hidden; /* this is important */
+    position: relative; /* this is important too */
+    border: 1px solid #ccc;
+    width: 137px;
+    height: 90px;
+}
+.roomPic img {
+    position: absolute;
+    /*top: 20px;
+    left: -55px;*/
+}

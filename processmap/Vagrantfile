@@ -1,0 +1,67 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "precise64"
+
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  config.vm.synced_folder ".", "/data/www/process"
+  config.vm.network :private_network, ip: "172.16.0.20"
+  config.vm.network :forwarded_port, guest: 22, host: 2020    
+  
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+
+  config.vm.provision :chef_solo do |chef|
+  	chef.cookbooks_path = "cookbooks"
+
+  	chef.add_recipe "apt"
+    chef.add_recipe "wordpress"
+
+    chef.json = {
+      "apache" => {
+      	"log_dir" => "/data/www/process/logs",
+      	"user" => "vagrant",
+      	"group" => "vagrant"
+      },
+      "php" => {
+        "directives" => {
+          "display_errors" => "On",
+          "display_startup_errors" => "On",
+          "error_reporting" => "E_ALL | E_STRICT",
+          "log_errors" => "On",
+          "error_log" => "/data/www/process/logs/php.error.log",
+          "short_open_tag" => "Off",
+          "post_max_size" => "1024M",
+          "upload_max_filesize" => "1024M",
+          "allow_url_fopen" => "1"
+        }
+      },
+      "fqdn" => "process.local",
+      "mysql" => {
+        "bind_address" => "172.16.0.20",      	
+      	"server_debian_password" => "root",
+      	"server_repl_password" => "root",
+      	"server_root_password" => "root",
+      	"allow_remote_root" => true
+      },
+      "phpmyadmin" => {
+      	"fpm" => false,
+      	"blowfish_secret" => "721c23e9cc0240e15763fcf8f28c130a"
+      },
+      "wordpress" => {
+      	"db" => {
+      		"user" => "process",
+      		"password" => "process",
+      		"database" => "process"
+      	},
+      	"dir" => "/data/www/process/public",
+      	"server_aliases" => "process.local"
+      }
+    }
+
+  end
+
+end

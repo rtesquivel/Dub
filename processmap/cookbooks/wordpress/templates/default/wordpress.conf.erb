@@ -1,0 +1,44 @@
+<VirtualHost *:80>
+  EnableSendfile off
+
+  ServerName <%= @params[:server_name] %>
+  ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
+  DocumentRoot <%= @params[:docroot] %>
+
+  <Directory <%= @params[:docroot] %>>
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    php_value file_uploads "1"
+    php_value upload_max_filesize "2G"
+    php_value post_max_size "2G"
+    php_value max_file_uploads 9999
+  </Directory>
+
+  <Directory />
+    Options FollowSymLinks
+    AllowOverride None
+  </Directory>
+
+  LogLevel info
+  ErrorLog <%= node['apache']['log_dir'] %>/<%= @params[:name] %>-error.log
+  CustomLog <%= node['apache']['log_dir'] %>/<%= @params[:name] %>-access.log combined
+
+  RewriteEngine On
+  RewriteLog <%= node['apache']['log_dir'] %>/<%= @application_name %>-rewrite.log
+  RewriteLogLevel 0
+
+  Alias /phpmyadmin <%= node['phpmyadmin']['home'] %>
+
+  <Directory <%= node['phpmyadmin']['home'] %>>
+    Options FollowSymLinks
+    DirectoryIndex index.php
+    AllowOverride All
+    php_value file_uploads "1"
+    php_value upload_max_filesize "2G"
+    php_value post_max_size "2G"
+    php_value max_file_uploads 9999
+  </Directory>
+
+</VirtualHost>

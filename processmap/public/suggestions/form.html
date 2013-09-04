@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--[if IE 8]>    <html class="theme-fixed no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="theme-fixed no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="theme-fixed no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+	<title>Duarte Suggestions Box</title>
+	<link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/com.duarte.vogue/duarte.css">
+	<script src="https://s3-us-west-1.amazonaws.com/com.duarte.vogue/duarte.js"></script>	
+	<!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+	<script type="text/javascript" charset="utf-8">
+		require(['jquery'], function($){ 
+			$('form').on('submit', function(e){
+				e.preventDefault();
+				if($(this).data('sending')) return;										
+				
+				$('.spinner').show();
+				$('form [type=submit]').addClass('disabled');
+				$(this).data('sending', true);
+				$.ajax({
+					url: $(this).attr('action'),
+					type: 'POST',
+					dataType: 'json',
+					data: {'subject': $('[name=subject]').val(), 'suggestion': $('[name=suggestion]').val()},
+				 	success: function(){
+						$('.spinner').hide();
+						$('form').hide();
+						$('.wrapup').show();
+						$('<h4 />').html( $('[name=subject]').val() ).appendTo('.wrapup');
+						$('<pre />').html( $('[name=suggestion]').val() ).appendTo('.wrapup');
+					}
+				}); 				
+			});
+		});
+	</script>
+	
+</head>
+<body>
+	
+	<header class="row">
+		<div class="twelve columns">
+			<div class="duarte-logo svg left" style="margin-right: 20px;"></div>
+            <h2 class="thin" style="margin-top:0.5em;">Suggestions&nbsp;Box</h2>
+        </div>
+    </header>
+
+	<section class="row">
+			<div class="twelve columns">				
+				<form action="index.php/submit" method="POST">
+					
+					<h4>This message will be sent anonymously to Nancy, Drew, and Kerry.</h4>										
+					<fieldset>
+						<input type="text" class="" placeholder="Subject" name="subject">
+						<textarea rows="13" class="" name="suggestion" style="min-height:400px;"></textarea>						
+					</fieldset>
+					<div class="row">
+						<div class="six columns mobile-two">
+							<a class="button black success medium next" onclick="$('form').submit();" type="submit">Send Suggestion</a> <i class="spinner evelyn-loading" style="display:none;"></i>
+						</div>
+						<div class="six columns mobile-two text-right">
+							<a href="javascript: history.back();" class="button black secondary">Cancel</a>
+						</div>
+					</div>
+					
+					
+				</form>
+				<div class="wrapup twelve columns" style="display:none;">
+					<div class="fill-gulf-stream" style="padding: 15px; margin-bottom:2em;">
+					  <h4 class="">Suggestion Sent!</h4>			
+					</div>
+				</div>
+			</div>			
+	</section>
+
+	<footer class="row">
+        
+            <div class="six columns offset-by-six text-right">
+                <ul class="legal">
+                    <li><a href="http://www.duarte.com/">Duarte, Inc.</a></li>
+                    <li>INTERNAL CONFIDENTIAL</li>
+                </ul>
+            </div>
+        
+    </footer>
+
+</body>
+</html>
